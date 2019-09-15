@@ -6,3 +6,5 @@ RUN curl https://bootstrap.pypa.io/get-pip.py|python
 # Install app dependencies
 RUN pip install --upgrade pip
 RUN pip install cx_Oracle pysphere ldap.modlist
+
+EXPOSE 50000
