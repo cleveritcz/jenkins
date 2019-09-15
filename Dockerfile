@@ -5,7 +5,7 @@ RUN apt-get install -y python-pip python-ldap
 #RUN curl https://bootstrap.pypa.io/get-pip.py|python
 # Install app dependencies
 RUN pip install --upgrade pip
-RUN pip install cx_Oracle pysphere python-ldap
+RUN pip install cx_Oracle pysphere python-ldap yaml
 
 EXPOSE 8080
 EXPOSE 50000
