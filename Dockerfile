@@ -7,4 +7,5 @@ RUN curl https://bootstrap.pypa.io/get-pip.py|python
 RUN pip install --upgrade pip
 RUN pip install cx_Oracle pysphere ldap.modlist
 
+EXPOSE 80
 EXPOSE 50000
