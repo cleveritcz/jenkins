@@ -7,5 +7,7 @@ RUN apt-get install -y python-pip python-ldap python-yaml
 RUN pip install --upgrade pip
 RUN pip install cx_Oracle pysphere python-ldap
 
+EXPOSE 389
+EXPOSE 1521
 EXPOSE 8080
 EXPOSE 50000
