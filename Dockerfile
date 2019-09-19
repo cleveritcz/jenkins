@@ -5,7 +5,7 @@ RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1
 
 # Install Oracle client
 RUN wget -q -O /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm https://download.oracle.com/otn_software/linux/instantclient/193000/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
-RUN alien -d /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
+RUN cd /root && alien -d /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
 RUN ls -l /root
 RUN dpkg -i /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.deb
 RUN rm -f /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.deb
