@@ -1,7 +1,7 @@
 FROM jenkins/jenkins
 USER root
 RUN apt-get update
-RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1
+RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1 python3 python3-pip
 
 # Install Oracle client
 RUN wget -q -O /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm https://download.oracle.com/otn_software/linux/instantclient/193000/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
@@ -15,6 +15,7 @@ RUN apt -f install
 # Install app dependencies
 RUN pip install --upgrade pip
 RUN pip install cx_Oracle pysphere python-ldap
+RUN pip3 install podman-compose
 
 EXPOSE 389
 EXPOSE 1521
