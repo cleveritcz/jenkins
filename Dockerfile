@@ -13,7 +13,7 @@ RUN rm -f /root/oracle-instantclient19.3-basic_19.3.0.0.0-2_amd64.deb /root/orac
 # Install app dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN pip3 install podman-compose
+RUN pip3 install podman-compose ansible
 
 EXPOSE 389
 EXPOSE 1521
