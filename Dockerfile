@@ -12,7 +12,7 @@ RUN rm -f /root/oracle-instantclient19.3-basic_19.3.0.0.0-2_amd64.deb /root/orac
 #RUN curl https://bootstrap.pypa.io/get-pip.py|python
 # Install app dependencies
 RUN pip install --upgrade pip
-RUN pip install cx_Oracle pysphere python-ldap
+RUN pip install -r requirements.txt
 RUN pip3 install podman-compose
 
 EXPOSE 389
