@@ -1,0 +1,6 @@
+cx_Oracle 
+pysphere 
+python-ldap 
+simplejson 
+urllib3
+requests
