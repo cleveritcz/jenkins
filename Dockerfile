@@ -2,9 +2,6 @@ FROM jenkins/jenkins
 USER root
 RUN apt-get update
 RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1 python3 python3-pip bsd-mailx
-RUN apt-get install -y postfix || exit 1
-#RUN echo "relayhost = [smtp.cpas.cz]" >> /etc/postfix/main.cf
-RUN service postfix reload
 
 # Install Oracle client
 RUN wget -q -O /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm https://download.oracle.com/otn_software/linux/instantclient/193000/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
@@ -21,9 +18,6 @@ RUN pip install -r /opt/requirements.txt
 RUN rm -f /opt/requirements.txt
 RUN pip3 install podman-compose ansible
 
-EXPOSE 25
 EXPOSE 8888
-EXPOSE 389
-EXPOSE 1521
 EXPOSE 8080
 EXPOSE 50000
