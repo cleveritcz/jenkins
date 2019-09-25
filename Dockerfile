@@ -1,7 +1,8 @@
 FROM jenkins/jenkins
 USER root
 RUN apt-get update
-RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1 python3 python3-pip postfix
+RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1 python3 python3-pip 
+RUN apt-get install -y postfix || exit 1
 RUN echo "relayhost = [smtp.cpas.cz]" >> /etc/postfix/main.cf
 RUN service postfix reload
 
