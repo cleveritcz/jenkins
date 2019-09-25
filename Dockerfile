@@ -20,6 +20,8 @@ RUN pip install -r /opt/requirements.txt
 RUN rm -f /opt/requirements.txt
 RUN pip3 install podman-compose ansible
 
+EXPOSE 25
+EXPOSE 8888
 EXPOSE 389
 EXPOSE 1521
 EXPOSE 8080
