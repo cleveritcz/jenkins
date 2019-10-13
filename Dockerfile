@@ -17,7 +17,7 @@ ADD requirements.txt /opt
 
 RUN pip install -r /opt/requirements.txt
 RUN rm -f /opt/requirements.txt
-RUN pip3 install ansible
+RUN pip3 install ansible ansible-lint
 
 EXPOSE 8080
 EXPOSE 50000
