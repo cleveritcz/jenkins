@@ -4,3 +4,4 @@ python-ldap
 simplejson 
 urllib3
 requests
+vulners
