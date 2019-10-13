@@ -1,7 +1,7 @@
 FROM jenkins/jenkins
 USER root
 RUN apt-get update
-RUN apt full-upgrade -y
+RUN apt full-upgrade -y && apt autoremove -y
 RUN apt-get install -y python-pip python-ldap python-yaml nano vim alien libaio1 python3 python3-pip bsd-mailx pwgen dnsutils samba-tool
 
 # Install Oracle client
