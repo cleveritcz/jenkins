@@ -9,6 +9,9 @@ RUN cd /root && alien -d /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_6
 RUN dpkg -i /root/oracle-instantclient19.3-basic_19.3.0.0.0-2_amd64.deb
 RUN rm -f /root/oracle-instantclient19.3-basic_19.3.0.0.0-2_amd64.deb /root/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
 
+# Change timezone
+RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+
 #RUN curl https://bootstrap.pypa.io/get-pip.py|python
 # Install app dependencies
 RUN pip install --upgrade pip
