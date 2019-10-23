@@ -5,3 +5,4 @@ simplejson
 urllib3
 requests
 vulners
+smtplib
