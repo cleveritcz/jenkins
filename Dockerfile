@@ -16,7 +16,7 @@ RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localti
 
 #RUN curl https://bootstrap.pypa.io/get-pip.py|python
 # Install app dependencies
-RUN pip install --upgrade pip
+RUN pip install -U pip==9.0.2
 ADD requirements.txt /opt
 
 RUN pip install -r /opt/requirements.txt
