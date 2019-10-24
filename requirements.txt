@@ -5,5 +5,5 @@ simplejson
 urllib3
 requests
 vulners
-magic==0.1
+magic
 mailclient
