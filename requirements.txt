@@ -7,3 +7,4 @@ requests
 vulners
 magic
 mailclient
+file-magic
