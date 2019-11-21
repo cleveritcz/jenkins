@@ -5,6 +5,5 @@ simplejson
 urllib3
 requests
 vulners
-python-magic
 mailclient
 file-magic
