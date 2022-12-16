@@ -15,7 +15,7 @@ RUN wget https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zi
 RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
 # Install app dependencies
-RUN pip3 install -U pip3
+#RUN pip3 install -U pip
 ADD requirements.txt /opt
 
 RUN pip3 install -r /opt/requirements.txt
