@@ -1,8 +1,8 @@
 FROM jenkins/jenkins
 USER root
-RUN apt-get update
+RUN apt update
 RUN apt full-upgrade -y && apt autoremove -y
-RUN apt-get install -y python3-pip python3-ldap python3-yaml nano vim alien libaio1 pwgen dnsutils samba python3-magic
+RUN apt install -y python3-pip python3-ldap python3-yaml nano vim alien libaio1 pwgen dnsutils samba python3-magic wget
 # Install Oracle client
 RUN wget -q -O /root/oracle-instantclient-basic-21.8.0.0.0-1.el8.x86_64.rpm https://download.oracle.com/otn_software/linux/instantclient/218000/oracle-instantclient-basic-21.8.0.0.0-1.el8.x86_64.rpm
 RUN cd /root && alien -d /root/oracle-instantclient-basic-21.8.0.0.0-1.el8.x86_64.rpm
