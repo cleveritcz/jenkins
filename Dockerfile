@@ -5,9 +5,12 @@ RUN microdnf -y update
 RUN microdnf -y install java-11-openjdk wget
 
 # Install Jenkins
-RUN wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-RUN microndnf --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-RUN microdnf install jenkins --nobest
+RUN mkdir -p /usr/share/jenkins/ /var/jenkins_home
+RUN wget -O /usr/share/jenkins/jenkins.war https://get.jenkins.io/war-stable/2.375.1/jenkins.war
+
+# Add bash script
+COPY jenkins.sh /usr/local/bin/jenkins.sh
+RUN chmod +x /usr/local/bin/jenkins.sh
 
 # Install Packer
 RUN wget https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && mv packer /usr/sbin/packer && chmod u+x /usr/sbin/packer
