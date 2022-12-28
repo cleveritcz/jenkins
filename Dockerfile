@@ -23,12 +23,8 @@ RUN wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd6
 # Change timezone
 RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
+# Upgrade pip3
 RUN pip3 install -U pip
-# Install app dependencies
-ADD requirements.txt /opt
-
-RUN pip3 install -r /opt/requirements.txt
-RUN rm -f /opt/requirements.txt
 
 # Install Ansible
 RUN pip3 install ansible ansible-lint
