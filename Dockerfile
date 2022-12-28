@@ -2,7 +2,7 @@ FROM rockylinux/rockylinux:9.1-minimal
 
 # Install dependencies
 RUN microdnf -y update
-RUN microdnf -y install java-11-openjdk wget
+RUN microdnf -y install java-11-openjdk wget unzip
 
 # Install Jenkins
 RUN mkdir -p /usr/share/jenkins/ /var/jenkins_home
