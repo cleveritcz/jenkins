@@ -27,7 +27,7 @@ COPY plugins.yaml /var/jenkins_home/plugins.yaml
 RUN wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar
 
 # Download plugins
-RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f plugins.yaml -d /usr/share/jenkins/ref/plugins --verbose
+RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins --verbose
 
 # Install Packer
 RUN wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer
