@@ -49,6 +49,10 @@ ENV JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT=50000
 ENV JENKINS_VERSION=2.384
 ENV REF=/usr/share/jenkins/ref
+ENV JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
+ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
+ENV COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
+ENV JENKINS_UC=https://updates.jenkins.io
 ENV PATH="/app/python3.11/bin:$PATH"
 
 EXPOSE 8080
