@@ -18,7 +18,7 @@ RUN chmod 500 /usr/local/bin/jenkins.sh
 
 # Install Jenkins
 RUN mkdir -p /usr/share/jenkins/ref /var/jenkins_home
-RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war-stable/2.384/jenkins.war
+RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/2.384/jenkins.war
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh
 
 # Install Packer
