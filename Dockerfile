@@ -24,6 +24,12 @@ RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin
 # Install Packer
 RUN wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer
 
+# Upgrade pip3
+RUN pip3 install -U pip
+
+# Install Ansible
+RUN pip3 install ansible ansible-lint
+
 # Change timezone
 RUN rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
@@ -34,12 +40,6 @@ ENV JENKINS_SLAVE_AGENT_PORT=50000
 ENV JENKINS_VERSION=2.375.1
 ENV REF=/usr/share/jenkins/ref
 ENV PATH="/app/python3.11/bin:$PATH"
-
-# Upgrade pip3
-RUN pip3 install -U pip
-
-# Install Ansible
-RUN pip3 install ansible ansible-lint
 
 EXPOSE 8080
 EXPOSE 50000
