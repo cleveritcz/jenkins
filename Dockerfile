@@ -5,6 +5,11 @@ ENV JENKINS_SLAVE_AGENT_PORT=50000
 ENV JENKINS_VERSION=2.375.1
 ENV REF=/usr/share/jenkins/ref
 
+RUN echo "Prepping user and group jenkins"
+RUN echo -e "jenkins:x:1000:" >> /etc/group
+RUN echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd
+RUN echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow
+
 # Install dependencies
 RUN microdnf -y update
 RUN microdnf -y install java-11-openjdk wget unzip python3-pip
