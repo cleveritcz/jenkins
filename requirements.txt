@@ -3,6 +3,4 @@ pysphere
 simplejson 
 urllib3
 requests
-vulners
-mailclient
 file-magic
