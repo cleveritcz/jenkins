@@ -1,4 +1,0 @@
-simplejson 
-urllib3
-requests
-file-magic
