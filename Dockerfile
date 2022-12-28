@@ -15,6 +15,7 @@ RUN microdnf -y install java-11-openjdk wget unzip
 # Install Jenkins
 RUN mkdir -p /usr/share/jenkins/ref /var/jenkins_home
 RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war-stable/2.375.1/jenkins.war
+RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home
 
 # Add bash script
 COPY jenkins.sh /usr/local/bin/jenkins.sh
