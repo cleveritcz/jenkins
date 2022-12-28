@@ -36,10 +36,10 @@ ENV REF=/usr/share/jenkins/ref
 ENV PATH="/app/python3.11/bin:$PATH"
 
 # Upgrade pip3
-RUN /app/python3.11/bin/pip3 install -U pip
+RUN pip3.11 install -U pip
 
 # Install Ansible
-RUN /app/python3.11/bin/pip3 install ansible ansible-lint
+RUN pip3.11 install ansible ansible-lint
 
 EXPOSE 8080
 EXPOSE 50000
