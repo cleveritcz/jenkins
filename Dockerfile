@@ -13,7 +13,7 @@ RUN microdnf -y update
 RUN microdnf -y install java-11-openjdk wget unzip tar
 
 # Add init script
-COPY jenkins.sh /usr/local/bin/jenkins.sh
+COPY src/jenkins.sh /usr/local/bin/jenkins.sh
 RUN chmod 500 /usr/local/bin/jenkins.sh
 
 # Install Jenkins
