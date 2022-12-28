@@ -1,7 +1,7 @@
 FROM cleveritcz/python:3.11-rocky-linux-9
 
 ENV PATH="/app/python3.11/bin:$PATH"
-ENV JENKINS_VERSION=2.375.1
+ENV JENKINS_VERSION=2.384
 
 RUN echo "Prepping user and group jenkins"
 RUN echo -e "jenkins:x:1000:" >> /etc/group
@@ -18,7 +18,7 @@ RUN chmod 500 /usr/local/bin/jenkins.sh
 
 # Install Jenkins
 RUN mkdir -p /usr/share/jenkins/ref /var/jenkins_home
-RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war-stable/2.375.1/jenkins.war
+RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war-stable/2.384/jenkins.war
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh
 
 # Install Packer
@@ -37,7 +37,7 @@ USER jenkins
 
 ENV JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT=50000
-ENV JENKINS_VERSION=2.375.1
+ENV JENKINS_VERSION=2.384
 ENV REF=/usr/share/jenkins/ref
 ENV PATH="/app/python3.11/bin:$PATH"
 
