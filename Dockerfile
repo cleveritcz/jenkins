@@ -20,6 +20,7 @@ RUN chmod 500 /usr/local/bin/jenkins.sh
 RUN mkdir -p /usr/share/jenkins/ref /var/jenkins_home
 RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/2.384/jenkins.war
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh
+COPY jenkins-plugin-cli /bin/jenkins-plugin-cli 
 
 # Install Packer
 RUN wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer
