@@ -21,3 +21,12 @@ plugins:
   - artifactId: ansible
     source:
       version: latest
+  - artifactId: mina-sshd-api-common
+    source:
+      version: latest
+  - artifactId: mina-sshd-api-core
+    source:
+      version: latest
+  - artifactId: sshd
+    source:
+      version: latest
