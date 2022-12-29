@@ -30,3 +30,6 @@ plugins:
   - artifactId: sshd
     source:
       version: latest
+  - artifactId: locale
+    source:
+      version: latest
