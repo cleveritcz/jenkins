@@ -1,6 +1,5 @@
-FROM cleveritcz/python:3.11-rocky-linux-9
+FROM rockylinux/rockylinux:9-minimal
 
-ENV PATH="/app/python3.11/bin:$PATH"
 ENV JENKINS_VERSION=2.384
 
 RUN echo "Prepping user and group jenkins"
@@ -10,7 +9,7 @@ RUN echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow
 
 # Install dependencies
 RUN microdnf -y update
-RUN microdnf -y install java-11-openjdk wget unzip tar
+RUN microdnf -y install java-11-openjdk wget unzip tar python3-pip
 
 # Add init script
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
@@ -53,7 +52,6 @@ ENV JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
 ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
 ENV COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
 ENV JENKINS_UC=https://updates.jenkins.io
-ENV PATH="/app/python3.11/bin:$PATH"
 
 EXPOSE 8080
 EXPOSE 50000
