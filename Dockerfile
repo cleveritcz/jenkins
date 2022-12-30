@@ -9,7 +9,7 @@ RUN echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow
 
 # Install dependencies
 RUN microdnf -y update
-RUN microdnf -y install java-11-openjdk wget unzip tar python3-pip
+RUN microdnf -y install java-11-openjdk wget unzip tar python3-pip git
 
 # Add init script
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
