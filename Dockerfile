@@ -13,7 +13,6 @@ RUN microdnf -y update && microdnf -y install java-11-openjdk wget unzip tar pyt
 # Install Jenkins
 RUN mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home
 RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/2.384/jenkins.war
-RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh
 
 # Download jenkins-plugin-manager
 RUN wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar
@@ -37,7 +36,8 @@ COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli
 COPY src/plugins.yaml /var/jenkins_home/plugins.yaml
 COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
-RUN chmod 500 /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins-support
+RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh && \
+    chmod 500 /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins-support
 
 USER jenkins
 
