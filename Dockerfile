@@ -31,7 +31,7 @@ RUN wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugi
 RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
 
 # Install Docker
-RUN microdnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+COPY src/docker-ce.repo /etc/yum.repos.d/docker-ce.repo
 RUN microdnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 RUN usermod -aG docker jenkins
 
