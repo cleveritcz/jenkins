@@ -17,9 +17,6 @@ RUN wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/2.384/je
 # Download jenkins-plugin-manager
 RUN wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar
 
-# Download plugins
-RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
-
 # Install Packer
 RUN wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer
 
@@ -38,6 +35,9 @@ COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh && \
     chmod 500 /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins-support
+
+# Download plugins
+RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
 
 USER jenkins
 
