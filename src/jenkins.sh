@@ -37,7 +37,9 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
     )
   fi
 
-  jenkins_opts_array=( )
+  jenkins_opts_array=( \
+  '-Dhttps.protocols=TLSv1.2' \
+  )
   while IFS= read -r -d '' item; do
     jenkins_opts_array+=( "$item" )
   done < <([[ $JENKINS_OPTS ]] && xargs printf '%s\0' <<<"$JENKINS_OPTS")
