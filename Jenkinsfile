@@ -13,7 +13,7 @@
 
 pipeline {
   agent {
-    kubernetes {
+    any {
       //cloud 'kubernetes'
       defaultContainer 'kaniko'
       yaml '''
