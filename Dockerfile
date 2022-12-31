@@ -11,7 +11,7 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.9/jenkins-plugin-manager-2.12.9.jar && \
     wget -qq https://releases.hashicorp.com/packer/1.8.5/packer_1.8.5_linux_amd64.zip && unzip packer_1.8.5_linux_amd64.zip && rm -f packer_1.8.5_linux_amd64.zip && \ 
     mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer && \
-    python3 -m pip3 install -U pip && python3 -m pip3 install ansible ansible-lint && \
+    python3 -m pip install -U pip && python3 -m pip install ansible ansible-lint && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
