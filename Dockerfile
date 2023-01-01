@@ -24,7 +24,6 @@ RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin
 
 USER jenkins
 
-ENV JENKINS_JAVA_OPTIONS="-Dhttps.protocols=TLSv1.2"
 ENV JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT=50000
 ENV JENKINS_VERSION=2.384
