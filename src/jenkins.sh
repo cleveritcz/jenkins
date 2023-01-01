@@ -12,7 +12,7 @@ find "${REF}" \( -type f -o -type l \) -exec bash -c '. /usr/local/bin/jenkins-s
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 
   # shellcheck disable=SC2001
-  effective_java_opts=$(sed -e 's/^ $//' <<<"$JAVA_OPTS $JENKINS_JAVA_OPTS")
+  effective_java_opts=$(sed -e 's/^ $//' <<<"$JAVA_OPTS $JENKINS_JAVA_OPTS -Dhttps.protocols=TLSv1.2")
 
   # read JAVA_OPTS and JENKINS_OPTS into arrays to avoid need for eval (and associated vulnerabilities)
   java_opts_array=()
