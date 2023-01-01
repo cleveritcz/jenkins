@@ -27,7 +27,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 
   readonly lifecycle_property='hudson.lifecycle'
   if [[ "${JAVA_OPTS:-}" != *"${lifecycle_property}"* ]]; then
-    java_opts_array+=( "-D${lifecycle_property}=hudson.lifecycle.ExitLifecycle" )
+    java_opts_array+=( "-D${lifecycle_property}=hudson.lifecycle.ExitLifecycle -Dhttps.protocols=TLSv1.2" )
   fi
 
   if [[ "$DEBUG" ]] ; then
@@ -37,9 +37,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
     )
   fi
 
-  jenkins_opts_array=( \
-  '-Dhttps.protocols=TLSv1.2' \
-  )
+  jenkins_opts_array=()
   while IFS= read -r -d '' item; do
     jenkins_opts_array+=( "$item" )
   done < <([[ $JENKINS_OPTS ]] && xargs printf '%s\0' <<<"$JENKINS_OPTS")
