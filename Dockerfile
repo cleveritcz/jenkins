@@ -32,7 +32,6 @@ ENV JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
 ENV JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
 ENV COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
 ENV JENKINS_UC=https://updates.jenkins.io
-ENV JAVA_OPTS="-Dcasc.reload.token=jenkins-0 -Dhttps.protocols=TLSv1.2"
 
 EXPOSE 8080
 EXPOSE 50000
