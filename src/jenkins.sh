@@ -1,6 +1,6 @@
 #! /bin/bash -e
 
-JAVA_OPTS =  '-Dhttps.protocols=TLSv1.2'
+: "${JAVA_OPTS:="-Dhttps.protocols=TLSv1.2"}"
 : "${JENKINS_WAR:="/usr/share/jenkins/jenkins.war"}"
 : "${JENKINS_HOME:="/var/jenkins_home"}"
 : "${COPY_REFERENCE_FILE_LOG:="${JENKINS_HOME}/copy_reference_file.log"}"
