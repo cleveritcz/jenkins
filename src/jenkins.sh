@@ -1,5 +1,6 @@
 #! /bin/bash -e
 
+: "${JENKINS_JAVA_OPTS:="-Dhttps.protocols=TLSv1.2"}"
 : "${JENKINS_WAR:="/usr/share/jenkins/jenkins.war"}"
 : "${JENKINS_HOME:="/var/jenkins_home"}"
 : "${COPY_REFERENCE_FILE_LOG:="${JENKINS_HOME}/copy_reference_file.log"}"
@@ -12,7 +13,7 @@ find "${REF}" \( -type f -o -type l \) -exec bash -c '. /usr/local/bin/jenkins-s
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 
   # shellcheck disable=SC2001
-  effective_java_opts=$(sed -e 's/^ $//' <<<"$JAVA_OPTS $JENKINS_JAVA_OPTS -Dhttps.protocols=TLSv1.2")
+  effective_java_opts=$(sed -e 's/^ $//' <<<"$JAVA_OPTS $JENKINS_JAVA_OPTS")
 
   # read JAVA_OPTS and JENKINS_OPTS into arrays to avoid need for eval (and associated vulnerabilities)
   java_opts_array=()
