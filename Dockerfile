@@ -6,8 +6,7 @@ ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 
 RUN curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
-    curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
-    rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+    curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar
 
 FROM base
 
