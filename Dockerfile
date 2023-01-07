@@ -6,7 +6,7 @@ ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 ENV PACKER_VERSION=1.8.5
 
-RUN microdnf -y update && microdnf -y install wget unzip git && \
+RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 wget unzip git && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
