@@ -21,8 +21,7 @@ COPY src/plugins.yaml /var/jenkins_home/plugins.yaml
 COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh && \
-    chmod 500 /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins-support && \
-    java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
+    chmod 500 /usr/local/bin/jenkins.sh && chmod +x /usr/local/bin/jenkins-support
 
 USER jenkins
 
