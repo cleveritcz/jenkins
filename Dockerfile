@@ -6,11 +6,11 @@ ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 ENV PACKER_VERSION=1.8.5
 
-RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 wget unzip git && \
+RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 unzip git && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
-    wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
-    wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
-    wget -qq https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip && unzip packer_$PACKER_VERSION_linux_amd64.zip && rm -f packer_$PACKER_VERSION_linux_amd64.zip && \ 
+    curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
+    curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
+    curl -o packer_$PACKER_VERSION_linux_amd64.zip -fsSL https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip && unzip packer_$PACKER_VERSION_linux_amd64.zip && rm -f packer_$PACKER_VERSION_linux_amd64.zip && \
     mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
