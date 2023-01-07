@@ -5,7 +5,7 @@ FROM base as builder
 ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 
-RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 unzip git && \
+RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 unzip tar git && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
