@@ -17,7 +17,6 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
-COPY src/plugins.yaml /var/jenkins_home/plugins.yaml
 COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
 RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /usr/local/bin/jenkins.sh && \
