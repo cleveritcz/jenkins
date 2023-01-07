@@ -2,17 +2,14 @@ FROM rockylinux/rockylinux:9-minimal
 
 ENV JENKINS_VERSION=2.375.1
 ENV PLUGIN_MANAGER_VERSION=2.12.9
-ENV PACKER_VERSION=1.8.5
 
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
     echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow && \
-    microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip tar git python3-pip && \
+    microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 java-17-openjdk unzip tar git python3-pip && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
-    curl -o packer_$PACKER_VERSION_linux_amd64.zip -fsSL https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip && unzip packer_$PACKER_VERSION_linux_amd64.zip && rm -f packer_$PACKER_VERSION_linux_amd64.zip && \
-    mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer && \
     pip3 install -U pip && pip3 install ansible ansible-lint && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
