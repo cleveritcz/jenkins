@@ -5,8 +5,7 @@ FROM base as builder
 ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 
-RUN microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 unzip tar git && \
-    mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
+RUN mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
@@ -16,7 +15,7 @@ FROM base
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
     echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow && \
-    microdnf -y update && microdnf -y install java-11-openjdk unzip tar git ansible \
+    microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip findutils \
     && rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
     
 COPY --from=builder /usr/sbin/packer /usr/sbin/packer
