@@ -1,4 +1,4 @@
-FROM rockylinux/rockylinux:9-minimal
+FROM rockylinux/rockylinux:9-minimal as base
 # Builder
 FROM base as builder
 
@@ -6,10 +6,7 @@ ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
 ENV PACKER_VERSION=1.8.5
 
-RUN echo -e "jenkins:x:1000:" >> /etc/group && \
-    echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
-    echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow && \
-    microdnf -y update && microdnf -y install java-11-openjdk wget unzip tar git python3-pip && \
+RUN microdnf -y update && microdnf -y install wget unzip git && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     wget -qqO /usr/share/jenkins/jenkins.war https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
