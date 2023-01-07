@@ -11,8 +11,6 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     mkdir -p /usr/share/jenkins/ref /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
-    curl -o packer_$PACKER_VERSION_linux_amd64.zip -fsSL https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip && unzip packer_$PACKER_VERSION_linux_amd64.zip && rm -f packer_$PACKER_VERSION_linux_amd64.zip && \
-    mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer && \
     pip3 install -U pip && pip3 install ansible ansible-lint && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
 
