@@ -1,4 +1,6 @@
 FROM rockylinux/rockylinux:9-minimal
+# Builder
+FROM base as builder
 
 ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
@@ -13,8 +15,19 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     wget -qqO /opt/jenkins-plugin-manager.jar https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
     wget -qq https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_$PACKER_VERSION_linux_amd64.zip && unzip packer_$PACKER_VERSION_linux_amd64.zip && rm -f packer_$PACKER_VERSION_linux_amd64.zip && \ 
     mv packer /usr/sbin/packer && chmod +x /usr/sbin/packer && \
-    pip3 install -U pip && pip3 install ansible ansible-lint && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+
+FROM base
+
+RUN echo -e "jenkins:x:1000:" >> /etc/group && \
+    echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
+    echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow && \
+    microdnf -y update && microdnf -y install java-11-openjdk unzip tar git ansible \
+    && rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+    
+COPY --from=builder /usr/sbin/packer /usr/sbin/packer
+COPY --from=builder /usr/share/jenkins/jenkins.war /usr/share/jenkins/jenkins.war
+COPY --from=builder /opt/jenkins-plugin-manager.jar /opt/jenkins-plugin-manager.jar
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
 COPY src/jenkins-support /usr/local/bin/jenkins-support
