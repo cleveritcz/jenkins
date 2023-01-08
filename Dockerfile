@@ -1,4 +1,4 @@
-FROM rockylinux/rockylinux:9-minimal
+FROM rockylinux:9-minimal
 
 ENV JENKINS_VERSION=2.385
 ENV PLUGIN_MANAGER_VERSION=2.12.9
