@@ -43,7 +43,6 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   done < <([[ $JENKINS_OPTS ]] && xargs printf '%s\0' <<<"$JENKINS_OPTS")
 
   exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
-#  exec java -Djdk.tls.client.protocols="TLSv1.2,TLSv1.3" -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
 fi
 
 # As argument is not jenkins, assume user wants to run a different process, for example a `bash` shell to explore this image
