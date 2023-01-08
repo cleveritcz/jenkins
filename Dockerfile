@@ -7,7 +7,7 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
     echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow
     
-RUN microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip tar procps && \
+RUN microdnf -y install --setopt=install_weak_deps=0 java-17-openjdk unzip tar procps && \
     mkdir -p /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar \
