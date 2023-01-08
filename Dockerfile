@@ -11,14 +11,14 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war-stable/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
     pip3 install -U pip && pip3 install ansible ansible-lint && \
-    rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+    rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime && \
+    chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
 COPY src/plugins.yaml /var/jenkins_home/plugins.yaml
 COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
-RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home && \
-    java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
+RUN java -jar /opt/jenkins-plugin-manager.jar --war /usr/share/jenkins/jenkins.war -f /var/jenkins_home/plugins.yaml -d /usr/share/jenkins/ref/plugins
 
 USER jenkins
 
