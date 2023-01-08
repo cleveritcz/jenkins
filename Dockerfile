@@ -11,12 +11,12 @@ RUN microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip tar p
     mkdir -p /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_MANAGER_VERSION/jenkins-plugin-manager-$PLUGIN_MANAGER_VERSION.jar && \
-    rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+    rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime && \
+    chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
 COPY src/jenkins-support /usr/local/bin/jenkins-support
 COPY src/jenkins.sh /usr/local/bin/jenkins.sh
-RUN chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home 
 
 USER jenkins
 
