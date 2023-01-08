@@ -1,5 +1,3 @@
-
-
 FROM rockylinux/rockylinux:9-minimal
 
 ENV JENKINS_VERSION=2.385
