@@ -11,8 +11,7 @@ plugins:
       version: latest
   - artifactId: kubernetes
     source:
-      version: 0.8
-#      version: latest
+      version: latest
   - artifactId: workflow-aggregator
     source:
       version: latest
