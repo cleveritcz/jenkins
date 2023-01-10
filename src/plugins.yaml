@@ -11,7 +11,13 @@ plugins:
       version: latest
   - artifactId: kubernetes
     source:
-      version: latest
+      version: 3743.v1fa_4c724c3b_7
+  - artifactId: kubernetes-client-api
+    source:
+      version: 5.12.2-193.v26a_6078f65a_9
+  - artifactId: kubernetes-credentials
+    source:
+      version: 0.9.0
   - artifactId: workflow-aggregator
     source:
       version: latest
