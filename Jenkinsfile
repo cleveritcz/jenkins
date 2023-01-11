@@ -23,7 +23,7 @@ pipeline {
         spec:
           containers:
           - name: kaniko
-            image: gcr.io/kaniko-project/executor:v1.9.0-slim
+            image: cleveritcz/kaniko-aws:latest
             imagePullPolicy: Always
             command:
             - sleep
