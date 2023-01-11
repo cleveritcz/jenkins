@@ -1,55 +1,53 @@
-/**
- * This pipeline will build and deploy a Docker image with Kaniko
- * https://github.com/GoogleContainerTools/kaniko
- * without needing a Docker host
- *
- * You need to create a jenkins-docker-cfg secret with your docker config
- * as described in
- * https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token
- *
- * ie.
- * kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=csanchez --docker-password=mypassword --docker-email=john@doe.com
- */
-
+// Uses Declarative syntax to run commands inside a container.
 pipeline {
-  agent {
-    kubernetes {
-      //cloud 'kubernetes'
-      defaultContainer 'kaniko'
-      yaml '''
-        kind: Pod
-        name: kaniko
-        namespace: jenkins
-        spec:
-          containers:
-          - name: kaniko
-            image: cleveritcz/kaniko:latest
-            imagePullPolicy: Always
-            command:
-            - sleep
-            args:
-            - 99d
+    agent {
+        kubernetes {
+            yaml '''
+kind: Pod
+metadata:
+  name: kaniko
+  namespace: jenkins
+spec:
+  containers:
+  - name: shell
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: IfNotPresent
+    env:
+     - name: container
+       value: "docker"
+    command:
+     - /busybox/cat
+    tty: true
+    volumeMounts:
+      - name: docker-config
+        mountPath: /kaniko/.docker
+  volumes:
+    - name: docker-config
+      configMap:
+        name: docker-config
             volumeMounts:
               - name: jenkins-docker-cfg
                 mountPath: /kaniko/.docker
-          volumes:
-          - name: jenkins-docker-cfg
-            projected:
-              sources:
-              - secret:
-                  name: regcred
-                  items:
-                    - key: .dockerconfigjson
-                      path: config.json
+  volumes:
+    - name: jenkins-docker-cfg
+      projected:
+        sources:
+          - secret:
+              name: regcred
+                items:
+                  - key: .dockerconfigjson
+                    path: config.json
 '''
+            defaultContainer 'shell'
+        }
     }
-  }
-  stages {
-    stage('Build with Kaniko') {
-      steps {
-        git 'https://github.com/cleveritcz/jenkins.git'
-        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=cleveritcz/jenkins:$BRANCH_NAME'
-      }
-    }
-  }
+    stages {
+       stage('Build') {
+           steps {
+             container('shell'){
+               sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=cleveritcz/jenkins:${BRANCH_NAME}"
+          }
+        }
+        }
+}
 }
