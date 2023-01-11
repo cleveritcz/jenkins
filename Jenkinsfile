@@ -19,24 +19,17 @@ spec:
      - /busybox/cat
     tty: true
     volumeMounts:
-      - name: docker-config
+      - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
-  volumes:
-    - name: docker-config
-      configMap:
-        name: docker-config
-            volumeMounts:
-              - name: jenkins-docker-cfg
-                mountPath: /kaniko/.docker
   volumes:
     - name: jenkins-docker-cfg
       projected:
         sources:
-          - secret:
-              name: regcred
-                items:
-                  - key: .dockerconfigjson
-                    path: config.json
+        - secret:
+            name: regcred
+            items:
+              - key: .dockerconfigjson
+                path: config.json
 '''
             defaultContainer 'shell'
         }
