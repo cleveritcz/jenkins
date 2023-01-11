@@ -48,7 +48,7 @@ pipeline {
     stage('Build with Kaniko') {
       steps {
         git 'https://github.com/cleveritcz/jenkins.git'
-        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=cleveritcz/jenkins:latest'
+        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=cleveritcz/jenkins:$BRANCH_NAME'
       }
     }
   }
