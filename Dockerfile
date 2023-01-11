@@ -1,6 +1,6 @@
 FROM rockylinux:9-minimal
 
-ENV JENKINS_VERSION=2.375.1
+ENV JENKINS_VERSION=2.375.2
 ENV PLUGIN_CLI_VERSION=2.12.9
 
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
