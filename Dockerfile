@@ -1,6 +1,6 @@
 FROM rockylinux:9-minimal
 
-ENV JENKINS_VERSION=2.386
+ENV JENKINS_VERSION=2.375.2
 ENV PLUGIN_CLI_VERSION=2.12.9
 
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
@@ -9,7 +9,7 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     
 RUN microdnf -y install --setopt=install_weak_deps=0 java-17-openjdk unzip tar procps && \
     mkdir -p /usr/share/jenkins/ref/plugins /var/jenkins_home && \
-    curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war/$JENKINS_VERSION/jenkins.war && \
+    curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war-stable/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar \
     -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_CLI_VERSION/jenkins-plugin-manager-$PLUGIN_CLI_VERSION.jar && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime && \
