@@ -6,7 +6,7 @@ ENV PLUGIN_CLI_VERSION=2.12.9
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
     echo -e "jenkins:*:19295:0:99999:7:::" >> /etc/shadow && \
-    microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip tar git python3-pip procps && \
+    microdnf -y update && microdnf -y install --setopt=install_weak_deps=0 java-11-openjdk unzip tar git python3-pip git-lfs && \
     mkdir -p /usr/share/jenkins/ref/plugins /var/jenkins_home && \
     curl -o /usr/share/jenkins/jenkins.war -fsSL https://get.jenkins.io/war-stable/$JENKINS_VERSION/jenkins.war && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_CLI_VERSION/jenkins-plugin-manager-$PLUGIN_CLI_VERSION.jar && \
