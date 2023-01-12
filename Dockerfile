@@ -12,7 +12,7 @@ RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     curl -o /opt/jenkins-plugin-manager.jar -fsSL https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/$PLUGIN_CLI_VERSION/jenkins-plugin-manager-$PLUGIN_CLI_VERSION.jar && \
     pip3 install -U pip && pip3 install ansible ansible-lint && \
     rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime && \
-    chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home
+    chown -R jenkins:jenkins /usr/share/jenkins /var/jenkins_home /workspace
 
 COPY src/jenkins-plugin-cli /bin/jenkins-plugin-cli 
 COPY src/plugins.yaml /var/jenkins_home/plugins.yaml
