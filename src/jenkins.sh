@@ -42,7 +42,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
     jenkins_opts_array+=( "$item" )
   done < <([[ $JENKINS_OPTS ]] && xargs printf '%s\0' <<<"$JENKINS_OPTS")
 
-  exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
+  exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400 -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
 fi
 
 # As argument is not jenkins, assume user wants to run a different process, for example a `bash` shell to explore this image
