@@ -34,13 +34,19 @@ spec:
             defaultContainer 'shell'
         }
     }
-    stages {
-       stage('Build') {
-           steps {
-             container('shell'){
-               sh "/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=cleveritcz/jenkins:${BRANCH_NAME}"
-          }
+  stages {
+    stage('Build') {    
+      steps {
+        container(name: 'shell') {
+          sh '/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=cleveritcz/python:$BRANCH_NAME --build-arg JENKINS_VERSION=$JENKINS_VERSION --build-arg PLUGIN_CLI_VERSION=$PLUGIN_CLI_VERSION'
         }
-        }
-}
+
+      }
+    }
+
+  }
+  environment {
+    JENKINS_VERSION = '2.386'
+    PLUGIN_CLI_VERSION = '2.12.9'
+  }
 }
