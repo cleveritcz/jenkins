@@ -1,7 +1,7 @@
 FROM rockylinux:9-minimal
 
-ENV JENKINS_VERSION=2.375.2
-ENV PLUGIN_CLI_VERSION=2.12.9
+ARG JENKINS_VERSION
+ARG PLUGIN_CLI_VERSION
 
 RUN echo -e "jenkins:x:1000:" >> /etc/group && \
     echo -e "jenkins:x:1000:1000:jenkins:/var/jenkins_home:/bin/sh" >> /etc/passwd && \  
