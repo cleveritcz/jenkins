@@ -38,7 +38,7 @@ spec:
     stage('Build') {    
       steps {
         container(name: 'shell') {
-          sh '/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=cleveritcz/jenkins:$BRANCH_NAME --destination=cleveritcz/jenkins:$JENKINS_VERSION --build-arg JENKINS_VERSION=$JENKINS_VERSION --build-arg PLUGIN_CLI_VERSION=$PLUGIN_CLI_VERSION'
+          sh '/kaniko/executor --dockerfile `pwd`/Dockerfile --context `pwd` --destination=cleveritcz/jenkins:$BRANCH_NAME --destination=cleveritcz/jenkins:$JENKINS_VERSION-jdk17 --build-arg JENKINS_VERSION=$JENKINS_VERSION --build-arg PLUGIN_CLI_VERSION=$PLUGIN_CLI_VERSION'
         }
 
       }
