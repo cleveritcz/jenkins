@@ -46,7 +46,7 @@ spec:
 
   }
   environment {
-    JENKINS_VERSION = '2.390'
+    JENKINS_VERSION = '2.391'
     PLUGIN_CLI_VERSION = '2.12.9'
   }
 }
